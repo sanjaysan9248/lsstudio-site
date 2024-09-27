@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> LS STUDIO </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+            background-color: #f2f2f2;
+        }
+
+        .slideshow-container {
+            position: relative;
+            height: 90vh;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 55px;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #logo {
+            height: 250px;
+            width: auto;
+            position: absolute;
+            top: 1%;
+            left: 5%;
+            z-index: 10000;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: transform 3s ease-in-out;
+        }
+
+        .slide.show {
+            opacity: 1;
+        }
+
+        .slide.show img {
+            transform: scale(1.1);
+        }
+
+        .white-line {
+            position: absolute;
+            bottom: 8%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: white;
+        }
+
+        #caption {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2vw;
+            color: white;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #title2 {
+            font-size: 1.5vw;
+            color: white;
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            text-align: right;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            #caption {
+                font-size: 2.5vw;
+            }
+
+            #title2 {
+                font-size: 2vw;
+            }
+
+            #logo {
+                height: 200px;
+            }
+
+            .white-line {
+                bottom: 9%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #caption {
+                font-size: 4vw;
+                bottom: 12%;
+            }
+
+            #title2 {
+                font-size: 3vw;
+            }
+
+            #logo {
+                height: 160px;
+            }
+
+            .white-line {
+                bottom: 10%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #caption {
+                font-size: 5vw;
+            }
+
+            #title2 {
+                font-size: 4vw;
+            }
+
+            #logo {
+                height: 130px;
+            }
+
+            .white-line {
+                bottom: 12%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slideshow-container">
+        <img id="logo" src="img/logo.png" alt="Overlay Image">
+
+        <div class="slide">
+            <img src="img/2.jpg" alt="Image 2">
+        </div>
+        <div class="slide">
+            <img src="img/7.jpg" alt="Image 3">
+        </div>
+        <div class="slide">
+            <img src="img/5.jpg" alt="Image 4">
+        </div>
+        <div class="slide">
+            <img src="img/14.jpg" alt="Image 6">
+        </div>
+        <div class="slide">
+            <img src="img/3.jpg" alt="Image 6">
+        </div>
+
+        <div>
+            <div>
+                <p id="caption">"Photography That Speaks Without Words."</p>
+            </div>
+            <div class="white-line"></div>
+            <div id="title2">
+                <i style="font-size:24px" class="fa">&#xf0e0;</i> lalith.san97@gmail.com <br>
+                <i style="font-size:24px" class="fa">&#xf095;</i> +91 9500957954
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('show');
+                if (i === index) {
+                    slide.classList.add('show');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        showSlide(currentSlide);
+        setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+</body>
+
+</html>
