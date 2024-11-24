@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>SHARAN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: auto;
+            background-color: #f2f2f2;
+        }
+
+        @font-face {
+    font-family: 'cl'; /* Give the font a name */
+    src: url('cl.woff') format('woff'); /* Path to the .woff file */
+    font-weight: normal; /* You can set weight and style */
+    font-style: normal;
+}
+
+        .slideshow-container {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 55px;
+            opacity: 0.8;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #logo {
+            height: 250px;
+            width: auto;
+            position: absolute;
+            top: 1%;
+            left: 5%;
+            z-index: 10000;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: transform 3s ease-in-out;
+        }
+
+        .slide.show {
+            opacity: 1;
+        }
+
+        .slide.show img {
+            transform: scale(1.1);
+        }
+
+        #caption {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2vw;
+            color: white;
+            z-index: 1000;
+            font-family: cl;
+            text-align: center;
+        }
+
+    .button-container {
+    position: absolute;
+    right: 0; /* Align buttons to the far right */
+    top: 30%; /* Adjust margin from the top */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 5px; /* Add space between the buttons */
+    opacity: 1;
+    z-index: 1000; 
+}
+
+.button-container a {
+    text-decoration: none;
+}
+
+.whatsapp-button img,
+.phone-button img {
+    width: 50px; /* Adjust the size of the icons */
+    height: 50px;
+    transition: transform 0.3s; /* Smooth hover effect */
+
+}
+
+.whatsapp-button:hover img,
+.phone-button:hover img {
+    transform: scale(1.1); /* Scale effect on hover */
+}
+
+
+
+.image-gallery {
+    display: flex;
+    justify-content: center; /* Center the whole div */
+    align-items: center;
+    gap: 15px; /* 15px gap between images */
+    margin: 20px auto; /* Center the entire div horizontally */
+    width: auto; /* Remove fixed width, let it adjust naturally */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    border-radius: 10px; /* Curved sides for the container */
+    padding: 5px; /* Padding around images */
+    background-color: white; /* Background for the container */
+}
+
+.image-item {
+    text-align: center;
+}
+
+.image-item img {
+    width: 150px; /* Set width to 250px */
+    height: 100px; /* Set height to 200px */
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Remove any border */
+    border-radius: 15px; /* Rounded corners for images */
+}
+
+.image-item img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
+
+.image-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: #f0f0f0; /* Background color for the text */
+    padding: 5px;
+    border-radius: 5px; /* Rounded corners for the background */
+    color: #000; /* Text color */
+}
+
+        a {
+            text-decoration: none;
+            color: inherit; /* Use the color of the text */
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Fancy line */
+        .fancy-line {
+
+            .image-gallery {
+            display: flex;
+            justify-content: center; /* Center the whole div */
+            align-items: center;
+            gap: 15px; /* 15px gap between images */
+            margin: 20px auto; /* Center the entire div horizontally */
+            width: auto; /* Remove fixed width, let it adjust naturally */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            border-radius: 10px; /* Curved sides for the container */
+            padding: 0px; /* Padding around images */
+            background-color: white; /* Background for the container */
+}
+
+.image-item {
+    text-align: center;
+}
+
+.image-item img {
+    width: 250px; /* Set width to 250px */
+    height: 200px; /* Set height to 200px */
+    display: block;
+    margin: 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Remove any border */
+    border-radius: 15px; /* Rounded corners for images */
+}
+
+.image-item img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
+
+.image-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: #f0f0f0; /* Background color for the text */
+    padding: 5px;
+    border-radius: 5px; /* Rounded corners for the background */
+    color: #000; /* Text color */
+}
+
+            width: 80%; /* Set width of the whole line container */
+            margin: 40px auto; /* Center the div with spacing */
+            display: flex;
+            align-items: center;
+        }
+
+        .fancy-line::before,
+        .fancy-line::after {
+            content: "";
+            flex: 1; /* Make the lines take up equal space */
+            height: 2px; /* Thickness of the line */
+            background-color: black; /* Line color */
+        }
+
+
+        .line-text {
+            margin: 0 15px; /* Space around the text */
+            font-size: 24px; /* Big font size */
+            font-family: 'Cursive', 'Lucida Handwriting', sans-serif; /* Fancy font style */
+            font-weight: bold;
+            color: black;
+        }
+
+        .gallery-container {
+            text-align: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .gallery-tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            margin: 0 5px;
+            font-family: 'Georgia', serif; /* Fancy font */
+        }
+
+        .tab:hover {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .tab.active {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .galphotos {
+            column-count: 3; /* 3 images per row */
+            column-gap: 1px; /* No horizontal gap */
+            width: 90%;
+            margin: 0 auto;
+            padding: 0; /* Remove any padding around gallery */
+        }
+
+        .galphotos img {
+            width: 100%;
+            margin-bottom: 1px; /* 1px gap only at the bottom */
+            display: inline-block;
+            border-radius: 0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .galphotos img:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 0; /* Pointed corners */
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+
+        /* Responsive Design */
+        @media (max-width: 768px)
+         {
+            .image-item img {
+                width: 100%;
+            }
+
+            {
+            .galphotos {
+                column-count: 2; /* 2 images per row on smaller screens */
+            }
+
+             {
+
+            .gallery-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab {
+                width: 100%;
+                margin: 10px 0;
+            }
+
+        }
+
+        #contact-info {
+    position: absolute;
+    top: 13%;
+    right: 5%;
+    color: white;
+    text-align: right;
+    font-size: 1.2vw;
+    font-family: Arial, sans-serif;
+}
+
+.icon-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 5px 0;
+}
+
+.icon-text i {
+    margin-right: 8px;
+    font-size: 1.5vw;
+}
+
+.icon-text span {
+    font-size: 1.2vw;
+    white-space: nowrap;
+}
+
+.fa-envelope, .fa-phone {
+    color: white;
+}
+
+
+</style>
+</head>
+
+<body>
+    <!-- Slideshow Container -->
+    <div class="slideshow-container">
+        <img id="logo" src="logo.png" alt="Overlay Image">
+
+        <div class="slide">
+            <img src="2.jpg" alt="Image 2">
+        </div>
+        <div class="slide">
+            <img src="7.jpg" alt="Image 3">
+        </div>
+        <div class="slide">
+            <img src="5.jpg" alt="Image 4">
+        </div>
+
+    <div class="button-container">
+    <a href="https://wa.me/+919500957954" target="_blank" class="whatsapp-button">
+        <img src="wa.png" alt="WhatsApp">
+    </a>
+    <a href="tel:+919500957954" class="phone-button">
+        <img id="phone" src="phone.png" alt="Phone">   
+    </a>
+    <a href="https://www.instagram.com/ls_studio_official/profilecard/?igsh=d2psbnc5dXhycnZv" class="phone-button">
+        <img src="ig.png" alt="ig">   
+    </a>
+    </div>
+
+        <div id="caption"> "PHOTOGRAPHY THATS <br>SPEAKS WITHOUT WORDS"  </div>
+        </div>
+    </div>
+
+<div class="image-gallery">
+    <div class="image-item">
+        <a href="#link1">
+            <img src="18.jpg" alt="Image 1">
+            <p>Weddings</p>
+        </a>
+    </div>
+    <div class="image-item">
+        <a href="#link2">
+            <img src="3.jpg" alt="Image 2">
+            <p>Couple Outdoors</p>
+        </a>
+    </div>
+    <div class="image-item">
+        <a href="#link3">
+            <img src="17.jpg" alt="Image 3">
+            <p>Baby Shoot</p>
+        </a>
+    </div>
+    <div class="image-item">
+        <a href="#link4">
+            <img src="5.jpg" alt="Image 4">
+            <p>Silhouette</p>
+        </a>
+    </div>
+</div>
+
+
+    <!-- Fancy Line for Galleries -->
+    <div class="fancy-line">
+        <div class="fancy-line"></div>
+        <div class="line-text"><p>Our Moments</p></div>
+        <div class="fancy-line"></div>
+    </div>
+
+    <div class="gallery-container">
+        <div class="gallery-tabs">
+            <h3 class="tab active" onclick="openGallery(1)">All</h3>
+            <h3 class="tab" onclick="openGallery(2)">Weddings</h3>
+            <h3 class="tab" onclick="openGallery(3)">Baby shoots</h3>
+            <h3 class="tab" onclick="openGallery(4)">Portraits</h3>
+        </div>
+
+        <!-- All tab images -->
+        <div class="gallery-images" id="gallery1" style="display: flex;">
+            <div class="galphotos">
+                <img src="2.jpg" alt="Image 1">
+                <img src="1.jpg" alt="Image 2">
+                <img src="2.jpg" alt="Image 3">
+                <img src="1.jpg" alt="Image 4">
+                <img src="2.jpg" alt="Image 5">
+                <img src="2.jpg" alt="Image 6">
+                <img src="2.jpg" alt="Image 7">
+                <img src="1.jpg" alt="Image 8">
+                <img src="1.jpg" alt="Image 9">
+            </div>
+        </div>
+
+        <!-- Weddings tab images -->
+        <div class="gallery-images" id="gallery2" style="display: none;">
+            <div class="galphotos">
+                <img src="3.jpg" alt="Wedding Image 1">
+                <img src="4.jpg" alt="Wedding Image 2">
+                <img src="4.jpg" alt="Wedding Image 3">
+                <img src="3.jpg" alt="Wedding Image 4">
+                <img src="4.jpg" alt="Wedding Image 5">
+                <img src="4.jpg" alt="Wedding Image 6">
+                <img src="4.jpg" alt="Wedding Image 7">
+                <img src="3.jpg" alt="Wedding Image 8">
+                <img src="3.jpg" alt="Wedding Image 9">
+            </div>
+        </div>
+
+        <!-- Baby shoots tab images -->
+        <div class="gallery-images" id="gallery3" style="display: none;">
+            <div class="galphotos">
+                <img src="14.jpg" alt="Baby Shoot Image 1">
+                <img src="8.jpg" alt="Baby Shoot Image 2">
+                <img src="14.jpg" alt="Baby Shoot Image 3">
+                <img src="8.jpg" alt="Baby Shoot Image 4">
+                <img src="14.jpg" alt="Baby Shoot Image 5">
+                <img src="14.jpg" alt="Baby Shoot Image 6">
+                <img src="14.jpg" alt="Baby Shoot Image 7">
+                <img src="8.jpg" alt="Baby Shoot Image 8">
+                <img src="8.jpg" alt="Baby Shoot Image 9">
+            </div>
+        </div>
+
+        <!-- Portraits tab images -->
+        <div class="gallery-images" id="gallery4" style="display: none;">
+            <div class="galphotos">
+                 <img src="3.jpg" alt="Wedding Image 1">
+                <img src="4.jpg" alt="Wedding Image 2">
+                <img src="4.jpg" alt="Wedding Image 3">
+                <img src="3.jpg" alt="Wedding Image 4">
+                <img src="4.jpg" alt="Wedding Image 5">
+                <img src="4.jpg" alt="Wedding Image 6">
+                <img src="4.jpg" alt="Wedding Image 7">
+                <img src="3.jpg" alt="Wedding Image 8">
+                <img src="3.jpg" alt="Wedding Image 9"> 
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Zoom Effect -->
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+    </div>
+
+    <div style=" display: flex; justify-content: center; align-items: center; height: calc(100vh - 50px);"> <!-- Adjusting height to account for margins -->
+    <div style="width: 70%; height: 20%; background-color: black; border-radius: 15px; padding: 20px; color: white; text-align: center;">
+        <h2 style="margin: 0;">ENQUIRE NOW</h2>
+        <p style="margin: 10px 0;">Get in touch with us to make your events a memorable one.</p>
+        <a href="your-link-here.html" style="display: inline-block; background-color: red; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">ENQUIRE NOW</a>
+    </div>
+</div>
+
+
+
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            const slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("show");
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+            slides[slideIndex - 1].classList.add("show");
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
+        }
+
+function openGallery(tabIndex, element) {
+    // Hide all galleries
+    const galleries = document.getElementsByClassName("gallery-images");
+    for (let i = 0; i < galleries.length; i++) {
+        galleries[i].style.display = "none";
+    }
+
+    // Show the selected gallery based on the tab index
+    document.getElementById("gallery" + tabIndex).style.display = "flex";
+
+    // Remove 'active' class from all tabs
+    const tabs = document.getElementsByClassName("tab");
+    for (let j = 0; j < tabs.length; j++) {
+        tabs[j].classList.remove("active");
+    }
+
+    // Add 'active' class to the clicked tab
+    element.classList.add("active");
+}
+s
+
+        function openModal(src) {
+            const modal = document.getElementById("myModal");
+            const modalImg = document.getElementById("img01");
+            modal.style.display = "flex";
+            modalImg.src = src;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
